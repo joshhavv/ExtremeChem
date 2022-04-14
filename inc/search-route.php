@@ -45,12 +45,48 @@ function extremeFinder($data) {
       if (get_post_type() == 'service') {
         array_push($results['services'], array(
           'title' => get_the_title(),
-          'permalink' => get_the_permalink()
+          'permalink' => get_the_permalink(),
+          'id' => get_the_id()
+          
         ));
       }
       
     }
-    
+
+    if($results['services']) {
+
+      $servicesMetaQuery = array('relation' => 'OR');
+
+      foreach($results['services'] as $item) {
+        array_push($servicesMetaQuery, array(
+          'key' => 'related_services',
+          'compare' => 'LIKE',
+          'value' => '"' . $item['id'] .'"'
+        ));
+      }
+      $servicesRelationshipQuery = new WP_Query(array(
+        'post_type' => 'product',
+        'meta_query' => $servicesMetaQuery
+      ));
+
+      while($servicesRelationshipQuery->have_posts()) {
+        $servicesRelationshipQuery->the_post();
+  
+        if (get_post_type() == 'product') {
+          array_push($results['products'], array(
+            'title' => get_the_title(),
+            'permalink' => get_the_permalink(),
+            'image' => get_the_post_thumbnail_url(0, 'productLandscape')
+          ));
+        }
+  
+      }
+
+      $results['products'] = array_values(array_unique($results['products'], SORT_REGULAR));
+
+    }
+
     return $results;
+
 }
 
