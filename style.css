@@ -909,22 +909,46 @@ i.fa.fa-search{
     border-bottom: 1px solid #CCC;
 }
 
-/*.link-list li{
-    
-    padding: 1rem 0;
-    font-size: 1.5rem;
-    border-bottom: 1px dotted #DEDEDE;
-  
+/*---------Search Form----------*/
+.search-form {
+    background-color: #DEDEDE;
+    padding: 20px;
+    text-align: center;
 }
-    
-.link-list li:last-child {
-    border-bottom: none;
+
+.search-form-row {
+    display: flex;
 }
-  
-.link-list a {
-    color: darkOrange;
+
+label.search-label{
+    display: block;
+    font-size: 1.5em;
+    font-family: 'Poppins', sans-serif;
+    color:#333;
+}
+
+.search-form .s {
+    min-width: 20px;
+    flex-basis: auto;
+    flex-grow: 1;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    padding: 10px;
+    font-size: 1.4rem;
     
-}*/
+}
+
+.search-submit {
+    flex-basis: 10%;
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    background-color: Blue;
+    font-family: 'Poppins', sans-serif;
+    padding: 0 20px;
+    margin-left: 10px;
+}
 
 
 

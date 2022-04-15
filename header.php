@@ -22,7 +22,7 @@
                             <li><a href="<?php echo site_url('/blog'); ?>">Blog</a></li>
                         </ul>
                     </nav>
-                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <a href="<?php echo esc_url(site_url('/search')); ?>"><i class="fa fa-search" aria-hidden="true"></i></a> 
                     <i class="fas fa-bars"></i>
                     
                 </div>

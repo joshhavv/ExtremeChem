@@ -40,6 +40,7 @@ function openOverlay() {
     setTimeout(() => searchField.focus(), 301);
     console.log('Our openOverlay just ran');
     isOverlayOpen = true;
+    return false;
 }
 
 function closeOverlay() {
