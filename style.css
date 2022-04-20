@@ -950,6 +950,14 @@ label.search-label{
     margin-left: 10px;
 }
 
+/*---------Login styles------------*/
+.login h1 a {
+    background-image: url(./images/istockphoto-133372893-612x612...jpg);
+}
+
+#loginform p {
+    text-align: justify;
+}
 
 
 

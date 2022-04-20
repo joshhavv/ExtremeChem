@@ -24,7 +24,16 @@
                             <li><a href="<?php echo site_url('/about-us'); ?>">About</a></li>
                             <li><a href="<?php echo site_url('/blog'); ?>">Blog Post</a></li>
                             <a href="<?php echo site_url('/privacy-policy'); ?>"><li>Privacy Policy</li></a>
-                            <li>Join Affiliate</li>
+                            
+                            <?php if(is_user_logged_in()) { ?>
+                                <span><?php echo get_avatar(get_current_user_id(), 50); ?></span> 
+                                <li><a href="<?php echo wp_logout_url(); ?>">Log Out</a></li>
+
+                            <?php } else { ?>
+                                <li><a href="<?php echo wp_login_url(); ?>">Login</a></li>
+                                <li><a href="<?php echo wp_registration_url(); ?>">Sign Up</a></li>
+                            <?php } ?>
+                            
                         </ul>
                     </div>
                     <div class="footer-col-4">

@@ -77,3 +77,43 @@ add_action('rest_api_init', 'extreme_custom_rest');
     }
 
     add_action('pre_get_posts', 'extreme_adjust_queries');
+
+   //Redirect subscriber accounts out of admin and on to ot home page
+
+   function redirectSubscribers () {
+        $currentUser = wp_get_current_user();
+
+       if (count($currentUser->roles) == 1 AND $currentUser->roles[0] == 'subscriber') {
+        wp_redirect(site_url());
+        exit;
+       }
+    }
+
+    add_action('wp_loaded', 'noSubsAdminBar');
+
+    function noSubsAdminBar () {
+        $currentUser = wp_get_current_user();
+
+       if (count($currentUser->roles) == 1 AND $currentUser->roles[0] == 'subscriber') {
+        show_admin_bar(false);
+       }
+    }
+
+    add_action('admin_init', 'redirectSubscribers');
+
+    // Customise Login Screen
+    add_filter('login_headerurl', 'ourHeaderUrl');
+
+    function ourHeaderUrl() {
+        return esc_url(site_url('/'));
+    }  
+    
+    add_action('login_enqueue_scripts', 'ourLoginCSS');
+
+    function ourLoginCSS() {
+        wp_enqueue_style('site_styles', get_stylesheet_uri('/bundled-assets/undefined'));
+        wp_enqueue_style('custom-google-fonts', '//fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+    }
+
+
+
