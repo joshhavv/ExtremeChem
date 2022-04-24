@@ -172,4 +172,36 @@ const typingLogic = {
   }
 }; 
 
+/*--------Like.js----------*/
+//1. describe and create / initiate an object
+var likeBox = document.querySelector(".like-box");
+
+//2. Events
+if(likeBox == null) {
+}else {
+  likeBox.addEventListener("click", clickDispatcher);
+}
+
+
+//3. Methods (function, action....)
+function clickDispatcher() {
+  if(likeBox.getAttribute("data-exists") == 'yes'){
+    deleteLike();
+  } else {
+    createLike();
+  }
+
+}
+
+function createLike() {
+alert ('create text message');
+}
+
+function deleteLike() {
+alert('delete like message');
+}
+
+
+
+
 
