@@ -13,7 +13,7 @@ function extremeLikeRoutes() {
     ));
 }
 
-function createLike() {
+function createLike($data) {
     return 'Thanks for trying to create a like.';
 }
 
