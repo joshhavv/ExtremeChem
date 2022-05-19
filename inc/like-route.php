@@ -34,7 +34,7 @@ function createLike($data) {
             return wp_insert_post(array(
                 'post_type' => 'like',
                 'post_status' => 'publish',
-                'post_title' => 'Our php create like test',
+                'post_title' => 'Our php create like post',
                 'meta_input' => array(
                     'liked_product_id' => $product
                 )
