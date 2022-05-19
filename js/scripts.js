@@ -1,3 +1,4 @@
+
 //Toggle Menu
 var MenuItems = document.getElementById("MenuItems")
 MenuItems.style.maxHeight = "0px"
@@ -201,12 +202,9 @@ async function createLike() {
     // the `fetch()` call will either return a Response or throw an error
     const response = await fetch(extremeData.root_url + "/wp-json/extremechem/v1/manageLike", {
       method: 'POST', 
-      mode: 'cors', // no-cors, *cors, same-origin
-      cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json'
-        // 'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': extremeData.nonce
       },
       body: JSON.stringify(data) // body data type must match "Content-Type" header
       
@@ -215,6 +213,13 @@ async function createLike() {
     // after this line, our function will wait for the `response.json()` call to be settled
     // the `response.json()` call will either return the JSON object or throw an error
     const results = await response.json();
+    if (results != "Only logged in users can create a like.") {
+      likeBox.setAttribute("data-exists", "yes")
+      var likeCount = parseInt(likeBox.querySelector(".like-count").innerHTML, 10)
+      likeCount++
+      likeBox.querySelector(".like-count").innerHTML = likeCount
+      likeBox.setAttribute("data-like", results)
+    }
     console.log(results);
 
   }
@@ -224,48 +229,39 @@ async function createLike() {
   
 }
 
-/*async function createLike() {
-  const data = { 'productId': likeBox.getAttribute("data-product") };
-
-  fetch(extremeData.root_url + "/wp-json/extremechem/v1/manageLike", {
-    method: 'POST', // or 'PUT'
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-    
-  })
-  .catch((e) => {
-    console.error('Error:', e);
-  });
-  
-}*/
-
 async function deleteLike() {
+
+  const data =  { "like": likeBox.getAttribute("data-like") };
   try {
     // after this line, our function will wait for the `fetch()` call to be settled
     // the `fetch()` call will either return a Response or throw an error
     const response = await fetch(extremeData.root_url + "/wp-json/extremechem/v1/manageLike", {
-      method: 'DELETE'
+      method: 'DELETE', 
+      headers: {
+        'Content-Type': 'application/json',
+        'X-WP-Nonce': extremeData.nonce
+      },
+      body: JSON.stringify(data) // body data type must match "Content-Type" header
+      
     });
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
+    
     // after this line, our function will wait for the `response.json()` call to be settled
     // the `response.json()` call will either return the JSON object or throw an error
     const results = await response.json();
+    likeBox.setAttribute("data-exists", "no")
+    var likeCount = parseInt(likeBox.querySelector(".like-count").innerHTML, 10)
+    likeCount--
+    likeBox.querySelector(".like-count").innerHTML = likeCount
+    likeBox.setAttribute("data-like", "")
+    
     console.log(results);
 
   }
-
   catch(error) {
     console.error(`Could not get results: ${error}`);
   }
   
 }
+
 
 

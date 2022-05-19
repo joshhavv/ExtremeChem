@@ -48,12 +48,13 @@ add_action('rest_api_init', 'extreme_custom_rest');
             wp_enqueue_script('extreme-chemicals-js', get_theme_file_uri('/js/scripts.js') , NULL, '1.0.1', true);
             wp_enqueue_style('site_styles', get_stylesheet_uri());
         }else{
-            wp_enqueue_script('extreme-chemicals-js', get_theme_file_uri('/bundled-assets/scripts.0cbb4a9b8929d8235969.js'), NULL, '1.0.1', true);
+            wp_enqueue_script('extreme-chemicals-js', get_theme_file_uri('/bundled-assets/scripts.f7aa2832c0a89862bf39.js'), NULL, '1.0.1', true);
             wp_enqueue_style('site_styles', get_stylesheet_uri('/bundled-assets/undefined'));
         }
 
         wp_localize_script('extreme-chemicals-js', 'extremeData', array(
-            'root_url' => get_site_url()
+            'root_url' => get_site_url(),
+            'nonce' => wp_create_nonce('wp_rest')
         ));
         
          
